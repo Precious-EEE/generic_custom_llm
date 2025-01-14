@@ -42,7 +42,14 @@ def openai_advanced_custom_llm_route():
                         content_type='application/json')
 
 
+# Add a default home page
+@app.route('/')
+def home():
+    return "<h1>Welcome to the Generic Customer Service Support LLM</h1><p>Use the endpoint '/chat/completions' for interactions.</p>"
+
+
 app.register_blueprint(custom_llm)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
